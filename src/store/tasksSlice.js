@@ -15,8 +15,10 @@ const initialState = [
 export const taskSlice = createSlice({
   name: 'tasks',
   initialState,
-  add: (state, action) => {
-    const task = createTask(action.payload);
-    state.push(task);
+  reducers: {
+    add: (state, action) => {
+      const task = createTask(action.payload);
+      state.push(task);
+    }
   }
 });
