@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createAction, createSlice, nanoid } from '@reduxjs/toolkit';
 
 const createTask = (title) => ({
   id: nanoid(),
@@ -9,7 +9,7 @@ const createTask = (title) => ({
 
 const initialState = [
   createTask('Order more energy drinks'),
-  createTask('Water the plants'),
+  createTask('Water the plants')
 ];
 
 export const taskSlice = createSlice({
@@ -19,6 +19,14 @@ export const taskSlice = createSlice({
     add: (state, action) => {
       const task = createTask(action.payload);
       state.push(task);
+    },
+    toggle: (state, action) => {
+      const task = state.find(task => task.id === action.payload.taskId);
+      task.completed = action.payload.completed;
     }
   }
 });
+
+export const toggleTask = createAction('tasks/toggle', (taskId, completed) => ({
+  payload: { taskId, completed }
+}));
