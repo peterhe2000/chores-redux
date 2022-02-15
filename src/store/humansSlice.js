@@ -23,7 +23,9 @@ export const humansSlice = createSlice({
       state.push(human);
     }
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
+    // deep level of control
+    // this is to listen taskSlice action and do something about it.
     builder.addCase(taskSlice.actions.assignToUser, (state, action) => {
       for (const human of state) {
         if (human.id === action.payload.humanId) {
@@ -34,8 +36,9 @@ export const humansSlice = createSlice({
           );
         }
       }
-    })
+    });
   }
+  // extraReducers
   // can do this too.
   //   {
   //   [someAction]: (state, action) => {}
